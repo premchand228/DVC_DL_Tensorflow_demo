@@ -1,0 +1,20 @@
+stages:
+  always_run:
+    cmd: python rough\rough.py
+  load_data:
+    cmd: python   src\stage_01_load_save.py
+    deps:
+      - config\config.yaml
+      - params.yaml
+      - src\stage_01_load_save.py
+    outs:
+      - data\cat
+      - data\dog
+  update_model:
+    cmd: python src\stage_02_prepare_base_model.py
+    deps: 
+     - config\config.yaml
+     - params.yaml
+     - data\cat
+     - data\dog
+     - src\stage_02_prepare_base_model.py
