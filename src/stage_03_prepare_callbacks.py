@@ -10,7 +10,7 @@ os.makedirs(log_dir, exist_ok=True)
 logging.basicConfig(filename=os.path.join(log_dir, 'running_logs.log'), level=logging.INFO, format=logging_str,
                     filemode="a")
 def prepare_callbacks(config_path,params_path):
-    config=read_yaml(config_path)
+    config=read_yaml(config_path) 
     params=read_yaml(params_path)
     artifacts=config["artifacts"]
     artifacts_dir=artifacts["ARTIFACTS_DIR"]
