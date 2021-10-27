@@ -2,27 +2,10 @@ import tensorflow as tf
 import logging
 
 def train_valid_generator(data_dir,IMAGE_SIZE,BATCH_SIZE, do_data_augmentation):
-    
-    datagenerator_kwargs = dict(
-        rescale = 1./255, 
-        validation_split=0.20
-    )
-
-    dataflow_kwargs = dict(
-        target_size = IMAGE_SIZE,
-        batch_size = BATCH_SIZE,
-        interpolation = "bilinear"
-    )
-
-    valid_datagenerator = tf.keras.preprocessing.image.ImageDataGenerator(**datagenerator_kwargs)
-
-    valid_generator = valid_datagenerator.flow_from_directory(
-        directory=data_dir,
-        subset="validation",
-        shuffle=False,
-        **dataflow_kwargs
-    )
-
+    datagenerator_kwargs=dict(rescale=1/255.0,validation_split=0.20)
+    dataflow_kwargs=dict(target_size=IMAGE_SIZE,batch_size=BATCH_SIZE,interpolation = "bilinear")
+    train_valid_generator=tf.keras.preprocessing.image.ImageDataGenerator(**datagenerator_kwargs)
+    valid_generator=train_valid_generator.flow_from_directory(directory=data_dir,subset="Validation",shuffle=False,**dataflow_kwargs)
     if do_data_augmentation:
         train_datagenerator = tf.keras.preprocessing.image.ImageDataGenerator(
             rotation_range=40,
@@ -43,3 +26,6 @@ def train_valid_generator(data_dir,IMAGE_SIZE,BATCH_SIZE, do_data_augmentation):
 
     logging.info("train and valid generator is created.")
     return train_generator, valid_generator
+
+    
+    
