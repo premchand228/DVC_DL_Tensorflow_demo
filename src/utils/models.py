@@ -48,6 +48,7 @@ def prepare_model(model, CLASSES, freeze_all, freeze_till, learning_rate):
 def load_full_model(untrained_full_model_path):
     model=tf.keras.models.load_model(untrained_full_model_path)
     logging.info(f"untrained full model is read from {model}")
+    return model
 
 def get_unique_path_to_save_model(trained_model_dir, model_name="model"):
     timestamp = get_timestamp(model_name)
